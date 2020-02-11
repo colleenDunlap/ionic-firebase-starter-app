@@ -24,9 +24,20 @@
   <div *ngIf="items.length == 0" class="empty-list">
     Please create your first task.
   </div>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="new-task">
+        <ion-icon name="calendar"></ion-icon>
+        <ion-label>NewTask</ion-label>
+        <ion-badge>6</ion-badge>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-content>
+
 <ion-footer (click)="logout()">
   <ion-toolbar color="medium">
     <ion-title>Log out</ion-title>
   </ion-toolbar>
 </ion-footer>
+
