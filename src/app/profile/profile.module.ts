@@ -5,15 +5,19 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HomePage } from './home.page';
-import { HomeResolver } from './home.resolver';
+import { Profile } from './profile';
+import { ProfileResolver } from './profile.resolver';
+
+  
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Platform } from '@ionic/angular';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomePage,
+    component: Profile,
     resolve: {
-      data: HomeResolver
+      data: ProfileResolver
     }
   }
 ];
@@ -26,9 +30,11 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [HomePage],
+  declarations: [Profile],
   providers: [
-    HomeResolver
+    ProfileResolver
   ]
 })
-export class HomePageModule {}
+export class ProfileTabModule {
+  
+}

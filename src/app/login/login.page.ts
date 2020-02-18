@@ -43,10 +43,11 @@ export class LoginPage implements OnInit {
     });
   }
 
+  /* for some reason it is immedietly naviagting to the tabs... */
   tryLogin(value){
     this.authService.doLogin(value)
     .then(res => {
-      this.router.navigate(["/home"]);
+      this.router.navigateByUrl('/app/tabs/tab1');
     }, err => {
       this.errorMessage = err.message;
       console.log(err)

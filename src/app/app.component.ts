@@ -26,9 +26,19 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      this.router.navigate(["/login"]);
+      this.statusBar.styleDefault();
+    });
+  }
+
+  /* not using this right now.  I think this can be helpful for saving logins between sessions, but right now we want to log in before loading the tabs.  */
+  /* PVC - 2/17 */
+  /*
+  initializeApp() {
+    this.platform.ready().then(() => {
       this.afAuth.user.subscribe(user => {
         if(user){
-          this.router.navigate(["/home"]);
+          this.router.navigateByUrl('/app/tabs/tab1');
         } else {
           this.router.navigate(["/login"]);
         }
@@ -40,4 +50,5 @@ export class AppComponent {
       this.statusBar.styleDefault();
     });
   }
+  */
 }
