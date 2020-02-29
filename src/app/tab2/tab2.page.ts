@@ -15,30 +15,32 @@ export class Tab2Page implements OnInit{
   async getGeo() {
 
       // Reference: https://ionicframework.com/docs/api/platform/Platform/#ready
-      await this.platform.ready();
+      //await this.platform.ready();
 
       // Load the ArcGIS API for JavaScript modules
-      const [Map, MapView]:any = await loadModules([
-          'esri/Map',
-          'esri/views/MapView'
-      ])
-          .catch(err => {
-              console.error('ArcGIS: ', err);
-          });
-
-      console.log('Starting up ArcGIS map');
-
-      let map = new Map({
-          basemap: 'hybrid'
-      });
-
-      // Inflate and display the map
-      let mapView = new MapView({
-          // create the map view at the DOM element in this component
-          container: this.mapEl.nativeElement,
-          center: [-12.287, -37.114],
-          zoom: 12,
-          map: map
+      loadModules([
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/views/SceneView"
+        ])
+      .then(function ([Map, MapView, SceneView]) {
+        
+        const map = new Map({
+          basemap: "streets"
+        });
+        
+        const viewOptions = {
+          container: "viewDiv",
+          map: map,
+          center: [-101.17, 21.78],
+          zoom: 8
+        };
+      
+        // 2D:
+        var view = new MapView(viewOptions);
+      
+        // 3D:
+        //var view = new SceneView(viewOptions);
       });
   }
 
