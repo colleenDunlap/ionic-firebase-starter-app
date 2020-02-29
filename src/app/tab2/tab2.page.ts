@@ -8,7 +8,7 @@ import { loadModules } from 'esri-loader';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page implements OnInit{
-  @ViewChild('map') mapEl: ElementRef;
+  @ViewChild('webmap') mapEl: ElementRef;
 
   constructor( public platform: Platform) {}
 
@@ -21,19 +21,22 @@ export class Tab2Page implements OnInit{
       loadModules([
         "esri/Map",
         "esri/views/MapView",
-        "esri/views/SceneView"
+        "esri/views/SceneView",
+        "esri/WebMap"
         ])
-      .then(function ([Map, MapView, SceneView]) {
+      .then(function ([WebMap, MapView, SceneView]) {
         
-        const map = new Map({
-          basemap: "streets"
-        });
+        var webmap = new WebMap({
+            portalItem: { // autocasts as new PortalItem()
+              id: 'f2e9b762544945f390ca4ac3671cfa72'
+            }
+          });
         
         const viewOptions = {
           container: "viewDiv",
-          map: map,
-          center: [-101.17, 21.78],
-          zoom: 8
+          map: webmap,
+          //center: [-101.17, 21.78],
+          //zoom: 8
         };
       
         // 2D:
