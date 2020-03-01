@@ -12,39 +12,34 @@ export class Tab2Page implements OnInit{
 
   constructor( public platform: Platform) {}
 
+
   async getGeo() {
+
+    
 
       // Reference: https://ionicframework.com/docs/api/platform/Platform/#ready
       //await this.platform.ready();
 
       // Load the ArcGIS API for JavaScript modules
-      loadModules([
-        "esri/Map",
-        "esri/views/MapView",
-        "esri/views/SceneView",
-        "esri/WebMap"
-        ])
-      .then(function ([WebMap, MapView, SceneView]) {
-        
-        var webmap = new WebMap({
-            portalItem: { // autocasts as new PortalItem()
-              id: 'f2e9b762544945f390ca4ac3671cfa72'
-            }
-          });
-        
-        const viewOptions = {
-          container: "viewDiv",
-          map: webmap,
-          //center: [-101.17, 21.78],
-          //zoom: 8
-        };
       
-        // 2D:
-        var view = new MapView(viewOptions);
-      
-        // 3D:
-        //var view = new SceneView(viewOptions);
-      });
+      loadModules(['esri/views/MapView', 'esri/WebMap'])
+  .then(([MapView, WebMap]) => {
+    // then we load a web map from an id
+    var webmap = new WebMap({
+      portalItem: { // autocasts as new PortalItem()
+        id: 'f2e9b762544945f390ca4ac3671cfa72'
+      }
+    });
+    // and we show that map in a container w/ id #viewDiv
+    var view = new MapView({
+      map: webmap,
+      container: 'viewDiv'
+    });
+  })
+  .catch(err => {
+    // handle any errors
+    console.error(err);
+  });
   }
 
   ngOnInit() {
