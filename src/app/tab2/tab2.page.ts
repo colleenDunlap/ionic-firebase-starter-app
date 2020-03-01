@@ -27,7 +27,7 @@ export class Tab2Page implements OnInit{
     // then we load a web map from an id
     var webmap = new WebMap({
       portalItem: { // autocasts as new PortalItem()
-        id: 'f2e9b762544945f390ca4ac3671cfa72'
+        id: '56a5b473d0854ca9ae4be9138b1f0371'
       }
     });
     // and we show that map in a container w/ id #viewDiv
