@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+
+interface Item{
+  name: "Disease",
+  symptoms: "fever",
+  prevention:"avoid drinking untreated water"
+};
 
 @Component({
   selector: 'app-tab1',
@@ -9,11 +17,17 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['tab1.page.scss']
 })
 
-export class Tab1Page {
+export class Tab1Page implements OnInit {
  
   currentDiseases: any = [];
+  myForm: FormGroup;
+  // Form state
+  loading = false;
+  success = false;
+  public diseases: Observable<any[]>;
+ // public diseases = [];
 
-  diseases = [
+  /*diseases = [
     {
       "name": "Disease",
       "symptoms": "fever",
@@ -30,20 +44,28 @@ export class Tab1Page {
       "preventative":"avoid drinking untreated water"
     }
   ];
-
+*/
+  
  
 
   constructor(
-    private formBuilder: FormBuilder,
+    private fb: FormBuilder,
+    private afs: AngularFirestore,
     private router: Router
   ) {    
 
 
    }
-
+   ngOnInit() {
+    
+    //this.myForm.valueChanges.subscribe(console.log);
+    const collection: AngularFirestoreCollection<Item> = this.afs.collection('disease_info');
+    this.diseases = this.afs.collection('disease_info').valueChanges();
+  }
  
 
   query(params?: any) {
+    /*
     if (!params) {
       return this.diseases;
     }
@@ -59,8 +81,12 @@ export class Tab1Page {
       }
       return null;
     });
+    */
   }
+  
+ 
    getDiseases(ev) {
+     /*
     let val = ev.target.value;
     if (!val || !val.trim()) {
       this.currentDiseases = [];
@@ -69,6 +95,7 @@ export class Tab1Page {
     this.currentDiseases = this.query({
       name: val
     });
+    */
   }
  
   // add this in to expand on diseases later

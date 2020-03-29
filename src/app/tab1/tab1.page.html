@@ -9,11 +9,19 @@
  
 
 <ion-content padding>
+  <ul>
+    <li *ngFor="let item of diseases | async">
+      
+      <p>{{item.name}}</p>  
+      <pre>{{item.prevention}}</pre>
+      <pre>{{item.symptoms}}</pre>]
+    </li>
+</ul>
   <ion-searchbar (ionInput)="getDiseases($event)" placeholder="Search Diseases"></ion-searchbar>
   <ion-list>
     <button ion-item (click)="openDisease(disease)" *ngFor="let disease of currentDiseases">
         <h2>{{disease.name}}</h2>
-        <p>{{disease.preventative}}</p>
+        <p>{{disease.prevention}}</p>
         <p>{{disease.symptoms}}</p>
         <ion-note item-end *ngIf="disease.note">{{disease.note}}</ion-note> <!--We can store outbreak info in the notes-->
       </button>
