@@ -1,11 +1,23 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab One
+      Diseases
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
+ 
+
 <ion-content padding>
-  <ion-button>Hello! Welcome to tab 1</ion-button>
+  <ion-searchbar (ionInput)="getDiseases($event)" placeholder="Search Diseases"></ion-searchbar>
+  <ion-list>
+    <button ion-item (click)="openDisease(disease)" *ngFor="let disease of currentDiseases">
+        <h2>{{disease.name}}</h2>
+        <p>{{disease.preventative}}</p>
+        <p>{{disease.symptoms}}</p>
+        <ion-note item-end *ngIf="disease.note">{{disease.note}}</ion-note> <!--We can store outbreak info in the notes-->
+      </button>
+
+  </ion-list>
+
 </ion-content>
