@@ -3,7 +3,7 @@ import { LoadingController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {FormGroup, FormBuilder} from '@angular/forms';
 
 interface Item{
   name: "Disease",
@@ -19,33 +19,16 @@ interface Item{
 
 export class Tab1Page implements OnInit {
  
-  currentDiseases: any = [];
+  //currentDiseases: any = [];
   myForm: FormGroup;
   // Form state
   loading = false;
   success = false;
-  public diseases: Observable<any[]>;
- // public diseases = [];
+  //public diseases: Observable<any[]>;
+  //public diseaseInfo: any[];
 
-  /*diseases = [
-    {
-      "name": "Disease",
-      "symptoms": "fever",
-      "preventative":"avoid drinking untreated water"
-    },
-    {
-      "name": "Disease2",
-      "symptoms": "fever",
-      "preventative":"avoid drinking untreated water"
-    },
-    {
-      "name": "Disease3",
-      "symptoms": "fever",
-      "preventative":"avoid drinking untreated water"
-    }
-  ];
-*/
-  
+  public goalList: any[];
+  public loadedGoalList: any[];
  
 
   constructor(
@@ -59,18 +42,50 @@ export class Tab1Page implements OnInit {
    ngOnInit() {
     
     //this.myForm.valueChanges.subscribe(console.log);
-    const collection: AngularFirestoreCollection<Item> = this.afs.collection('disease_info');
-    this.diseases = this.afs.collection('disease_info').valueChanges();
+    //const collection: AngularFirestoreCollection<Item> = this.afs.collection('disease_info');
+    //this.diseases = this.afs.collection('disease_info').valueChanges();
+    this.afs.collection('disease_info').valueChanges().subscribe(goalList => { this.goalList = goalList; this.loadedGoalList = goalList;})
+    //this.diseaseInfo = this.goalList
   }
  
+  initializeItems(): void{
+    this.goalList = this.loadedGoalList;
+  }
 
-  query(params?: any) {
-    /*
+
+  filterList(evt){
+    this.initializeItems();
+
+    const searchTerm = evt.srcElement.value;
+    console.log(searchTerm);//debugging
+    if(!searchTerm){
+      return this.goalList;
+    }
+    
+    this.goalList = this.goalList.filter(currentGoal =>{
+      if(currentGoal.name && searchTerm){
+        if(currentGoal.name.toLowerCase().indexOf(searchTerm.toLowerCase())> -1)
+        {
+          console.log(this.goalList);
+          return true;
+          
+        }
+        return false;
+      }
+      
+    })
+  }  
+  
+
+/*
+  search(params?: any) {
+    
     if (!params) {
       return this.diseases;
     }
- 
-    return this.diseases.filter((disease) => {
+    //convert 
+    
+    return this.diseaseInfo.filter((disease) => {
       for (let key in params) {
         let field = disease[key];
         if (typeof field == 'string' && field.toLowerCase().indexOf(params[key].toLowerCase()) >= 0) {
@@ -81,33 +96,25 @@ export class Tab1Page implements OnInit {
       }
       return null;
     });
-    */
+
+   // return this.diseases.map(diseases => diseases.filter(d => d.name === params ))
+    
   }
   
  
    getDiseases(ev) {
-     /*
+     
     let val = ev.target.value;
     if (!val || !val.trim()) {
       this.currentDiseases = [];
       return;
     }
-    this.currentDiseases = this.query({
+    this.currentDiseases = this.search({
       name: val
     });
-    */
-  }
- 
-  // add this in to expand on diseases later
-  openDisease(ev) {
-    /*
-    this.navCtrl.push('DiseaseDetailPage', {
-      disease: disease
-    });
-    */
-  }
-  
-  
+    
+  }*/
+   
  
 }
 

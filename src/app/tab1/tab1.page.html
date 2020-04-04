@@ -9,23 +9,13 @@
  
 
 <ion-content padding>
-  <ul>
-    <li *ngFor="let item of diseases | async">
-      
+<ion-list>
+  <ion-searchbar (ionInput)="filterList($event)" ></ion-searchbar>
+  <li *ngFor="let item of goalList"> 
       <p>{{item.name}}</p>  
       <pre>{{item.prevention}}</pre>
       <pre>{{item.symptoms}}</pre>]
-    </li>
-</ul>
-  <ion-searchbar (ionInput)="getDiseases($event)" placeholder="Search Diseases"></ion-searchbar>
-  <ion-list>
-    <button ion-item (click)="openDisease(disease)" *ngFor="let disease of currentDiseases">
-        <h2>{{disease.name}}</h2>
-        <p>{{disease.prevention}}</p>
-        <p>{{disease.symptoms}}</p>
-        <ion-note item-end *ngIf="disease.note">{{disease.note}}</ion-note> <!--We can store outbreak info in the notes-->
-      </button>
-
-  </ion-list>
+  </li>
+</ion-list>
 
 </ion-content>
