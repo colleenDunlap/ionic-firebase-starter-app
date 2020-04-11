@@ -1,0 +1,34 @@
+ [   {
+      "name": "Covid-19",
+      "symptoms": [
+          "fever", 
+          "cough", 
+          "fatigue"
+        ] ,
+      "precautions": [
+          "social",
+         "distancing",
+         "hand washing"
+        ],
+      "aliases": [
+          "coronavirus"
+        ]
+    },
+    {
+        "name": "Malaria",
+        "symptoms": [
+            "fever",
+            "chills",
+            "headache",
+            "nausea",
+            "diaria"
+        ],
+        "precautions": [
+            "insect repellent"
+        ],
+        "aliases": [
+            ""
+        ]
+      }
+   
+]

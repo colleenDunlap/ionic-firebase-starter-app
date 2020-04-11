@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+//import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import {FormGroup, FormBuilder} from '@angular/forms';
+import*as diseasesJson from '../../../src//diseases.json';
 
 interface Item{
   name: "Disease",
@@ -24,23 +25,55 @@ export class Tab1Page implements OnInit {
   loading = false;
   success = false;
 
-  public goalList: any[];
-  public loadedGoalList: any[];
+  public diseases = diseasesJson;
+  public filteredDiseases = [];
  
 
   constructor(
     private fb: FormBuilder,
-    private afs: AngularFirestore,
     private router: Router
   ) {    
 
 
    }
-   ngOnInit() {
-    this.afs.collection('disease_info').valueChanges().subscribe(goalList => { this.goalList = goalList; this.loadedGoalList = goalList;})
+  ngOnInit(): void {
+    console.log(diseasesJson);
   }
  
-  initializeItems(): void{
+  query(params?: any) {
+    if (!params) {
+      return this.diseases;
+    }
+
+    return this.diseases.filter((country) => {
+      for (let key in params) {
+        let field = country[key];
+        if (typeof field == 'string' && field.toLowerCase().indexOf(params[key].toLowerCase()) >= 0) {
+          return country;
+        } else if (field == params[key]) {
+          return country;
+        }
+      }
+      return null;
+    });
+  }
+
+
+  /* query for all countries that match the search*/
+  getCountries(ev) {
+    let val = ev.target.value;
+    if (!val || !val.trim()) {
+      this.filteredDiseases = [];
+      return;
+    }
+    this.filteredDiseases = this.query({
+      name: val
+    });
+  }
+
+
+
+  /*initializeItems(): void{
     this.goalList = this.loadedGoalList;
   }
 
@@ -66,7 +99,7 @@ export class Tab1Page implements OnInit {
       }
       
     })
-  }  
+  } */ 
    
  
 }

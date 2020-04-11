@@ -10,11 +10,11 @@
 
 <ion-content padding>
 <ion-list>
-  <ion-searchbar (ionInput)="filterList($event)" ></ion-searchbar>
+  <ion-searchbar (ionInput)="getCountries($event)" ></ion-searchbar>
   <li *ngFor="let item of goalList"> 
       <p>{{item.name}}</p>  
-      <pre>{{item.prevention}}</pre>
-      <pre>{{item.symptoms}}</pre>]
+      <pre>{{item.precautions}}</pre>
+      <pre>{{item.symptoms}}</pre>
   </li>
 </ion-list>
 
