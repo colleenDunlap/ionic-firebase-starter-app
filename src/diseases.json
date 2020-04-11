@@ -12,8 +12,58 @@
         ],
       "aliases": [
           "coronavirus"
+        ],
+        "affected countries":[
+            "algeria"
         ]
     },
+    {
+        "name": "Chlamydia",
+        "symptoms": [
+            "Runny or stuffy nose",
+            "Fatigue (feeling tired)",
+            "Low-grade fever",
+            "Hoarseness or loss of voice",
+            "Sore throat",
+            "Slowly worsening cough that can last for weeks or months",
+            "Headache"
+        ],
+        "precautions": [
+            "Cover mouth and nose when you cough or sneeze",
+            "Wash hands often",
+            "Antibiotics"
+        ],
+        "aliases": [
+            ""
+        ],
+        "affected countries":[
+            "algeria",
+            "afganistan"
+        ]
+      }
+    ,
+    {
+        "name": "Cholera",
+        "symptoms": [
+            "Rapid heart rate",
+            "Loss of skin elasticity (the ability to return to original position quickly if pinched)",
+            "Dry mucous membranes, including the inside of the mouth, throat, nose, and eyelids",
+            "Low blood pressure",
+            "Thirst",
+            "Muscle cramps"
+        ],
+        "precautions": [
+            "Drink bottled or filtered water",
+            "Clean all foods before consumption",
+        ],
+        "aliases": [
+            ""
+        ],
+        "affected countries":[
+            "algeria"
+        ]
+      }
+    ,
     {
         "name": "Malaria",
         "symptoms": [
@@ -28,7 +78,33 @@
         ],
         "aliases": [
             ""
+        ],
+        "affected countries":[
+            "Zimbabwe",
+            "Angola"
         ]
-      }
+      },
+    {
+        "name": "Yellow Fever",
+        "symptoms": [
+            "fever",
+            "chills",
+            "headache",
+            "nausea",
+            "diaria"
+        ],
+        "precautions": [
+            "Apply insect repellent frequently and as directed",
+            "Wear long-sleeved shirts and long pants",
+            "Use screens on windows and doors",
+            "Use air conditioning, if available"
+        ],
+        "aliases": [
+            ""
+        ],
+        "affected countries":[
+            "Angola"
+        ]
+    }
    
 ]
