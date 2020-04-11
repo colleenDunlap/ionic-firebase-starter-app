@@ -7,9 +7,9 @@ import {FormGroup, FormBuilder} from '@angular/forms';
 import*as diseasesJson from '../../../src//diseases.json';
 
 interface Item{
-  name: "Disease",
-  symptoms: "fever",
-  prevention:"avoid drinking untreated water"
+  name: "",
+  symptoms: [],
+  precautions:[]
 };
 
 @Component({
@@ -38,14 +38,15 @@ export class Tab1Page implements OnInit {
    }
   ngOnInit(): void {
     console.log(diseasesJson);
+    console.log(this.diseases)
   }
  
   query(params?: any) {
     if (!params) {
-      return this.diseases;
+      return diseasesJson;
     }
 
-    return this.diseases.filter((country) => {
+    return diseasesJson.filter((country) => {
       for (let key in params) {
         let field = country[key];
         if (typeof field == 'string' && field.toLowerCase().indexOf(params[key].toLowerCase()) >= 0) {
