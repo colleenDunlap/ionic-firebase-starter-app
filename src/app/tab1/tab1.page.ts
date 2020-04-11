@@ -19,13 +19,10 @@ interface Item{
 
 export class Tab1Page implements OnInit {
  
-  //currentDiseases: any = [];
   myForm: FormGroup;
   // Form state
   loading = false;
   success = false;
-  //public diseases: Observable<any[]>;
-  //public diseaseInfo: any[];
 
   public goalList: any[];
   public loadedGoalList: any[];
@@ -40,12 +37,7 @@ export class Tab1Page implements OnInit {
 
    }
    ngOnInit() {
-    
-    //this.myForm.valueChanges.subscribe(console.log);
-    //const collection: AngularFirestoreCollection<Item> = this.afs.collection('disease_info');
-    //this.diseases = this.afs.collection('disease_info').valueChanges();
     this.afs.collection('disease_info').valueChanges().subscribe(goalList => { this.goalList = goalList; this.loadedGoalList = goalList;})
-    //this.diseaseInfo = this.goalList
   }
  
   initializeItems(): void{
@@ -75,45 +67,6 @@ export class Tab1Page implements OnInit {
       
     })
   }  
-  
-
-/*
-  search(params?: any) {
-    
-    if (!params) {
-      return this.diseases;
-    }
-    //convert 
-    
-    return this.diseaseInfo.filter((disease) => {
-      for (let key in params) {
-        let field = disease[key];
-        if (typeof field == 'string' && field.toLowerCase().indexOf(params[key].toLowerCase()) >= 0) {
-          return disease;
-        } else if (field == params[key]) {
-          return disease;
-        }
-      }
-      return null;
-    });
-
-   // return this.diseases.map(diseases => diseases.filter(d => d.name === params ))
-    
-  }
-  
- 
-   getDiseases(ev) {
-     
-    let val = ev.target.value;
-    if (!val || !val.trim()) {
-      this.currentDiseases = [];
-      return;
-    }
-    this.currentDiseases = this.search({
-      name: val
-    });
-    
-  }*/
    
  
 }

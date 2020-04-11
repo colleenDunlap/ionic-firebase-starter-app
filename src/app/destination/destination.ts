@@ -14,7 +14,6 @@ export class Destination{
   countries = [
     {
       "name": "Afghanistan",
-      "price": "$1"
     },
     {
       "name": "Albania",
