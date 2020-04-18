@@ -16,7 +16,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { environment } from '../environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { NewTaskModalPage } from './new-task-modal/new-task-modal.page';
@@ -42,6 +42,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SplashScreen,
     ImagePicker,
     WebView,
+    Geolocation,
     { provide: FirestoreSettingsToken, useValue: {} },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

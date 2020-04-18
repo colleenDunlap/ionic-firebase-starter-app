@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
-
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 @Component({
   selector: 'app-destination',
   templateUrl: './destination.html',
   styleUrls: ['./destination.scss'],
 })
-export class Destination{
+export class Destination implements OnInit{
 
   currentCountries: any = [];
   countries = [
@@ -17,36 +17,55 @@ export class Destination{
     },
     {
       "name": "Albania",
-      "price": "$1"
     },
     {
       "name": "Algeria",
-      "price": "$1"
     },
     {
       "name": "Andorra",
-      "price": "$1"
     },
     {
       "name": "Angola",
-      "price": "$1"
     },
     {
       "name": "Zimbabwe",
-      "price": "$1"
     }
   ];
 
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    //public zone: NgZone,
+    public geolocation: Geolocation
   ) {    
-
     
    }
 
+   
+  ngOnInit(): void {
+    this.doGeo()
+  }
+
+  
+  doGeo(){
+  this.geolocation.getCurrentPosition().then((resp) => {
+     console.log(resp.coords.latitude)
+     console.log(resp.coords.longitude)
+   }).catch((error) => {
+     console.log('Error getting location', error);
+   });
+   
+   let watch = this.geolocation.watchPosition();
+   watch.subscribe((data) => {
+    // data can be a set of coordinates, or an error (if an error occurred).
+    // data.coords.latitude
+    // data.coords.longitude
+   });
+  }
+
   startApp() {
+    //this.doGeo();
     this.router.navigateByUrl('/app/tabs/tab1');
   }
 
