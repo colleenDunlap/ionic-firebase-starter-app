@@ -1,8 +1,10 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
+import{ NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+
 @Component({
   selector: 'app-destination',
   templateUrl: './destination.html',
@@ -14,21 +16,27 @@ export class Destination implements OnInit{
   countries = [
     {
       "name": "Afghanistan",
+      "flag": "assets\\png250px\\af.png"
     },
     {
       "name": "Albania",
+      "flag": "assets\\png250px\\al.png"
     },
     {
       "name": "Algeria",
+      "flag": "assets\\png250px\\ag.png"
     },
     {
       "name": "Andorra",
+      "flag": "assets\\png250px\\an.png"
     },
     {
       "name": "Angola",
+      "flag": "assets\\png250px\\ao.png"
     },
     {
       "name": "Zimbabwe",
+      "flag": "assets\\png250px\\zw.png"
     }
   ];
 
@@ -37,7 +45,9 @@ export class Destination implements OnInit{
     private formBuilder: FormBuilder,
     private router: Router,
     //public zone: NgZone,
-    public geolocation: Geolocation
+    public geolocation: Geolocation,
+    public geocoder: NativeGeocoder,
+    public toaster: ToastController
   ) {    
     
    }
@@ -52,6 +62,15 @@ export class Destination implements OnInit{
   this.geolocation.getCurrentPosition().then((resp) => {
      console.log(resp.coords.latitude)
      console.log(resp.coords.longitude)
+     let options: NativeGeocoderOptions = {
+       useLocale: true,
+       maxResults: 5
+     }
+     this.geocoder.reverseGeocode(resp.coords.latitude,resp.coords.longitude, options)
+     .then(
+       (result:NativeGeocoderResult[])=> document.querySelector('#currentUserLocation').innerHTML = result[0].countryName
+     )
+     .catch((error:any)=> console.log(error));
    }).catch((error) => {
      console.log('Error getting location', error);
    });
@@ -99,6 +118,25 @@ export class Destination implements OnInit{
       name: val
     });
   }
+
+  geolocate(){
+    /*
+    let options = {enableHighAccuracy:true};
+    this.geolocation.getCurrentPosition(options).then((
+      position:Geoposition) => {
+          this.getCurrentCountry(position, options);  
+        }).catch((err) =>{
+            alert(err);
+       })
+       */
+  }
+
+ /* getCurrentCountry(pos, options){
+    this.geocoder.reverseGeocode(pos.coords.latitude, pos.coords.longitude, options).then((res: NativeGeocoderResult[]) =>console.log(JSON.stringify(res[0])))
+    .catch((error: any) => console.log(error));
+    
+  }*/
+
 
   ionViewDidEnter() {
     // the root left menu should be disabled on the tutorial page

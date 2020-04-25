@@ -6,6 +6,7 @@
 
 <ion-content id=welcome no-bounce>
   <p>Select a country to view disease information</p>
+  <button ion-item id="currentUserLocation"></button>
 <!--Needs to change to implement country search functions-->
   <ion-searchbar (ionInput)="getCountries($event)" placeholder="Country"></ion-searchbar>
   <ion-list>
@@ -16,6 +17,7 @@
       </ion-avatar>
       <h2>{{country.name}}</h2>
     </button>
+    <br>
   </ion-list>
 
 </ion-content>

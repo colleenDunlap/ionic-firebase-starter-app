@@ -17,6 +17,8 @@ import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/fi
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+
 import { environment } from '../environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { NewTaskModalPage } from './new-task-modal/new-task-modal.page';
@@ -43,6 +45,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ImagePicker,
     WebView,
     Geolocation,
+    NativeGeocoder,
     { provide: FirestoreSettingsToken, useValue: {} },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
