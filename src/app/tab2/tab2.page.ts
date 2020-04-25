@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import {Destination} from '../destination/destination'
 
 import { loadModules } from 'esri-loader';
 @Component({
@@ -9,8 +10,10 @@ import { loadModules } from 'esri-loader';
 })
 export class Tab2Page implements OnInit{
   @ViewChild('webmap') mapEl: ElementRef;
+  lat4map :any;
+  long4map :any;
 
-  constructor( public platform: Platform) {}
+  constructor( public platform: Platform, public destination: Destination) {}
 
 
   async getGeo() {
@@ -43,6 +46,17 @@ export class Tab2Page implements OnInit{
   }
 
   ngOnInit() {
+      console.log("Tab 2 Wisdom")
+      /*
+      console.log(this.destination.doGeo()); 
+     // console.log(this.destination.doGeo());
+      this.destination.latuser = 7
+      console.log(this.destination.latuser)
+      */
+      this.lat4map = localStorage.getItem("lat")
+      this.long4map = localStorage.getItem("long")
+      console.log(Number(this.lat4map))
+      console.log(Number(this.long4map))
       this.getGeo();
   }
 }

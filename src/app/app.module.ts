@@ -21,6 +21,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
 import { environment } from '../environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {Destination} from '../app/destination/destination'
 // import { NewTaskModalPage } from './new-task-modal/new-task-modal.page';
 
 
@@ -46,6 +47,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     WebView,
     Geolocation,
     NativeGeocoder,
+    Destination,
     { provide: FirestoreSettingsToken, useValue: {} },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

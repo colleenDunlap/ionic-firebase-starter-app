@@ -11,7 +11,8 @@ import{ NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ion
   styleUrls: ['./destination.scss'],
 })
 export class Destination implements OnInit{
-
+  latuser
+  longuser
   currentCountries: any = [];
   countries = [
     {
@@ -54,23 +55,31 @@ export class Destination implements OnInit{
 
    
   ngOnInit(): void {
+    /*
+    console.log(this.geolocation.getCurrentPosition())
+    console.log(this.latuser)
+    console.log(this.longuser)
+    this.latuser = 7
+    this.longuser = 8
+    console.log(this.latuser)
+    console.log(this.longuser)
+    */
     this.doGeo()
   }
 
   
   doGeo(){
+    /*
   this.geolocation.getCurrentPosition().then((resp) => {
      console.log(resp.coords.latitude)
      console.log(resp.coords.longitude)
+     this.latuser = resp.coords.latitude; 
+     this.longuser = resp.coords.longitude; 
      let options: NativeGeocoderOptions = {
        useLocale: true,
        maxResults: 5
      }
-     this.geocoder.reverseGeocode(resp.coords.latitude,resp.coords.longitude, options)
-     .then(
-       (result:NativeGeocoderResult[])=> document.querySelector('#currentUserLocation').innerHTML = result[0].countryName
-     )
-     .catch((error:any)=> console.log(error));
+     
    }).catch((error) => {
      console.log('Error getting location', error);
    });
@@ -80,6 +89,11 @@ export class Destination implements OnInit{
     // data can be a set of coordinates, or an error (if an error occurred).
     // data.coords.latitude
     // data.coords.longitude
+   });
+   */
+   return  this.geolocation.getCurrentPosition().then((resp) => {
+    localStorage.setItem("lat", JSON.stringify(resp.coords.latitude));
+    localStorage.setItem("long", JSON.stringify(resp.coords.longitude));
    });
   }
 
