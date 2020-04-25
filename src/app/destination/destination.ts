@@ -17,7 +17,9 @@ export class Destination implements OnInit{
   countries = [
     {
       "name": "Afghanistan",
-      "flag": "assets\\png250px\\af.png"
+      "flag": "assets\\png250px\\af.png",
+      "lat": 33.9,
+      "long": 67.7
     },
     {
       "name": "Albania",
@@ -55,50 +57,59 @@ export class Destination implements OnInit{
 
    
   ngOnInit(): void {
-    /*
-    console.log(this.geolocation.getCurrentPosition())
-    console.log(this.latuser)
-    console.log(this.longuser)
-    this.latuser = 7
-    this.longuser = 8
-    console.log(this.latuser)
-    console.log(this.longuser)
-    */
+  
     this.doGeo()
   }
 
   
   doGeo(){
-    /*
-  this.geolocation.getCurrentPosition().then((resp) => {
-     console.log(resp.coords.latitude)
-     console.log(resp.coords.longitude)
-     this.latuser = resp.coords.latitude; 
-     this.longuser = resp.coords.longitude; 
-     let options: NativeGeocoderOptions = {
-       useLocale: true,
-       maxResults: 5
-     }
-     
-   }).catch((error) => {
-     console.log('Error getting location', error);
-   });
-   
-   let watch = this.geolocation.watchPosition();
-   watch.subscribe((data) => {
-    // data can be a set of coordinates, or an error (if an error occurred).
-    // data.coords.latitude
-    // data.coords.longitude
-   });
-   */
+    
    return  this.geolocation.getCurrentPosition().then((resp) => {
     localStorage.setItem("lat", JSON.stringify(resp.coords.latitude));
     localStorage.setItem("long", JSON.stringify(resp.coords.longitude));
    });
   }
 
-  startApp() {
+  startApp(ev) {
     //this.doGeo();
+    console.log(ev)
+    console.log(ev.target)
+    console.log(ev.target.data);
+    let countryName = ev.target.data
+    let iCountry = 0
+    console.log(this.countries.length)
+    if(ev.toElement.localName == "img"){
+      console.log("Image was clicked")
+      console.log(ev.target.currentSrc.length)
+      let pathLength = ev.target.currentSrc.length
+      let countryImgPath = ev.target.currentSrc.substr(pathLength-6, pathLength)
+      console.log(countryImgPath)
+      while (iCountry<this.countries.length){
+        let jsonCountryLength = this.countries[iCountry].flag.length
+        if(this.countries[iCountry].flag.substr(jsonCountryLength-6, jsonCountryLength)==countryImgPath){
+          console.log(this.countries[iCountry].lat)
+          console.log(this.countries[iCountry].long)
+          localStorage.setItem("currCountryLat", JSON.stringify(this.countries[iCountry].lat));
+          localStorage.setItem("currCountryLong", JSON.stringify(this.countries[iCountry].long));
+        }
+        iCountry++
+      }
+      
+
+    }
+    else{
+      console.log("Text was clicked")
+      while (iCountry<this.countries.length){
+        if(this.countries[iCountry].name==ev.target.textContent){
+          console.log(this.countries[iCountry].lat)
+          console.log(this.countries[iCountry].long)
+          localStorage.setItem("currCountryLat", JSON.stringify(this.countries[iCountry].lat));
+          localStorage.setItem("currCountryLong", JSON.stringify(this.countries[iCountry].long));
+        }
+        iCountry++
+      }
+  }
+
     this.router.navigateByUrl('/app/tabs/tab1');
   }
 
@@ -133,34 +144,9 @@ export class Destination implements OnInit{
     });
   }
 
-  geolocate(){
-    /*
-    let options = {enableHighAccuracy:true};
-    this.geolocation.getCurrentPosition(options).then((
-      position:Geoposition) => {
-          this.getCurrentCountry(position, options);  
-        }).catch((err) =>{
-            alert(err);
-       })
-       */
-  }
+ 
 
- /* getCurrentCountry(pos, options){
-    this.geocoder.reverseGeocode(pos.coords.latitude, pos.coords.longitude, options).then((res: NativeGeocoderResult[]) =>console.log(JSON.stringify(res[0])))
-    .catch((error: any) => console.log(error));
-    
-  }*/
-
-
-  ionViewDidEnter() {
-    // the root left menu should be disabled on the tutorial page
-    //this.menu.enable(false);
-  }
-
-  ionViewWillLeave() {
-    // enable the root left menu when leaving the tutorial page
-    //this.menu.enable(true);
-  } 
+  
 
 }
 

@@ -16,7 +16,7 @@ export class Tab2Page implements OnInit{
   constructor( public platform: Platform, public destination: Destination) {}
 
 
-  async getGeo() {
+  async loadMap(lat, long) {
 
     
 
@@ -36,7 +36,9 @@ export class Tab2Page implements OnInit{
     // and we show that map in a container w/ id #viewDiv
     var view = new MapView({
       map: webmap,
-      container: 'viewDiv'
+      container: 'viewDiv',
+      center: [long, lat], //not super accurate because of integer rounding
+      zoom: 8
     });
   })
   .catch(err => {
@@ -47,16 +49,10 @@ export class Tab2Page implements OnInit{
 
   ngOnInit() {
       console.log("Tab 2 Wisdom")
-      /*
-      console.log(this.destination.doGeo()); 
-     // console.log(this.destination.doGeo());
-      this.destination.latuser = 7
-      console.log(this.destination.latuser)
-      */
       this.lat4map = localStorage.getItem("lat")
       this.long4map = localStorage.getItem("long")
       console.log(Number(this.lat4map))
       console.log(Number(this.long4map))
-      this.getGeo();
+      this.loadMap(parseInt(this.lat4map), parseInt(this.long4map));
   }
 }
