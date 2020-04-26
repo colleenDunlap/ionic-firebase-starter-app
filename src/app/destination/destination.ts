@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
 import{ NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+import*as countriesJSON from '../../../src//countries.json';
 
 @Component({
   selector: 'app-destination',
@@ -14,6 +15,8 @@ export class Destination implements OnInit{
   latuser
   longuser
   currentCountries: any = [];
+  public countries = countriesJSON;
+  /*
   countries = [
     {
       "name": "Afghanistan",
@@ -44,8 +47,7 @@ export class Destination implements OnInit{
       "long": 29.2
     }
   ];
-
-
+*/
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -121,10 +123,10 @@ export class Destination implements OnInit{
 
   query(params?: any) {
     if (!params) {
-      return this.countries;
+      return countriesJSON;
     }
 
-    return this.countries.filter((country) => {
+    return countriesJSON.filter((country) => {
       for (let key in params) {
         let field = country[key];
         if (typeof field == 'string' && field.toLowerCase().indexOf(params[key].toLowerCase()) >= 0) {

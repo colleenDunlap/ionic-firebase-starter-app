@@ -20,12 +20,7 @@ export class Tab3Page {
 
 
   logout(){
-    this.authService.doLogout()
-    .then(res => {
-      this.router.navigate(["/login"]);
-    }, err => {
-      console.log(err);
-    })
+    this.router.navigateByUrl('');
   }
 
   ngOnInit() {

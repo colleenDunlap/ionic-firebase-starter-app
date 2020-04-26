@@ -11,12 +11,12 @@
   <ion-searchbar (ionInput)="getCountries($event)" placeholder="Country"></ion-searchbar>
   <ion-list>
     <!--pass in country info to startApp() to show either purchasing page or load the country info (if already purchased)-->
-    <button ion-item (click)="startApp($event)"  *ngFor="let country of currentCountries">
+    <ion-item (click)="startApp($event)"  *ngFor="let country of currentCountries">
       <ion-avatar item-start>
         <img [src]="country.flag" />
       </ion-avatar>
       <h2>{{country.name}}</h2>
-    </button>
+    </ion-item>
     <br>
   </ion-list>
 

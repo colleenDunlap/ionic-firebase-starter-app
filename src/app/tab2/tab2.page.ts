@@ -25,7 +25,7 @@ export class Tab2Page implements OnInit{
 
       // Load the ArcGIS API for JavaScript modules
       
-      loadModules(['esri/views/MapView', 'esri/WebMap'])
+      loadModules(['esri/views/MapView', 'esri/WebMap', 'esri/views/ui/UI'])
   .then(([MapView, WebMap]) => {
     // then we load a web map from an id
     var webmap = new WebMap({
@@ -40,6 +40,7 @@ export class Tab2Page implements OnInit{
       center: [long, lat], //not super accurate because of integer rounding
       zoom: 8
     });
+
   })
   .catch(err => {
     // handle any errors
