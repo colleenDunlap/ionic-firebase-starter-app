@@ -50,7 +50,7 @@ export class Tab2Page implements OnInit{
   ngOnInit() {
       console.log("Tab 2 Wisdom")
       let useUserLatLong = Number(localStorage.getItem("useCurrentLocationFlag"))
-      let mapID = '56a5b473d0854ca9ae4be9138b1f0371'
+      let mapID = '1baf4909d86642f5882af51f64c70210'
       if(useUserLatLong==0){
         this.lat4map = localStorage.getItem("currCountryLat")
         this.long4map = localStorage.getItem("currCountryLong")
