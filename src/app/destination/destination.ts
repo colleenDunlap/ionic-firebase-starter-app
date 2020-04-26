@@ -39,7 +39,9 @@ export class Destination implements OnInit{
     },
     {
       "name": "Zimbabwe",
-      "flag": "assets\\png250px\\zw.png"
+      "flag": "assets\\png250px\\zw.png",
+      "lat": -19.0,
+      "long": 29.2
     }
   ];
 
@@ -69,9 +71,13 @@ export class Destination implements OnInit{
     localStorage.setItem("long", JSON.stringify(resp.coords.longitude));
    });
   }
-
+  useCurrentLocation(ev){
+    localStorage.setItem("useCurrentLocationFlag", JSON.stringify(1))
+    this.router.navigateByUrl('/app/tabs/tab1');
+  }
   startApp(ev) {
     //this.doGeo();
+    localStorage.setItem("useCurrentLocationFlag", JSON.stringify(0))
     console.log(ev)
     console.log(ev.target)
     console.log(ev.target.data);

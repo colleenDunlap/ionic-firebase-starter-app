@@ -6,7 +6,7 @@
 
 <ion-content id=welcome no-bounce>
   <p>Select a country to view disease information</p>
-  <button ion-item id="currentUserLocation"></button>
+  <button ion-item id="currentUserLocation" (click)="useCurrentLocation($event)">Use Current Location</button>
 <!--Needs to change to implement country search functions-->
   <ion-searchbar (ionInput)="getCountries($event)" placeholder="Country"></ion-searchbar>
   <ion-list>

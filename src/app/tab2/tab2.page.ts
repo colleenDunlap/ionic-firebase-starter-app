@@ -16,7 +16,7 @@ export class Tab2Page implements OnInit{
   constructor( public platform: Platform, public destination: Destination) {}
 
 
-  async loadMap(lat, long) {
+  async loadMap(lat, long, mapID) {
 
     
 
@@ -30,7 +30,7 @@ export class Tab2Page implements OnInit{
     // then we load a web map from an id
     var webmap = new WebMap({
       portalItem: { // autocasts as new PortalItem()
-        id: '56a5b473d0854ca9ae4be9138b1f0371'
+        id: mapID
       }
     });
     // and we show that map in a container w/ id #viewDiv
@@ -49,10 +49,19 @@ export class Tab2Page implements OnInit{
 
   ngOnInit() {
       console.log("Tab 2 Wisdom")
-      this.lat4map = localStorage.getItem("lat")
-      this.long4map = localStorage.getItem("long")
+      let useUserLatLong = Number(localStorage.getItem("useCurrentLocationFlag"))
+      let mapID = '56a5b473d0854ca9ae4be9138b1f0371'
+      if(useUserLatLong==0){
+        this.lat4map = localStorage.getItem("currCountryLat")
+        this.long4map = localStorage.getItem("currCountryLong")
+        mapID = 'ba0e075b770a4e27914c9c94e24d265b'
+      }
+      else{
+        this.lat4map = localStorage.getItem("lat")
+        this.long4map = localStorage.getItem("long")
+      }
       console.log(Number(this.lat4map))
       console.log(Number(this.long4map))
-      this.loadMap(parseInt(this.lat4map), parseInt(this.long4map));
+      this.loadMap(parseInt(this.lat4map), parseInt(this.long4map), mapID);
   }
 }
